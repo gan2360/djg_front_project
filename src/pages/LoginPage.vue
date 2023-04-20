@@ -1,71 +1,17 @@
 <template>
   <div>
     <div class="center_box">
-      <h3>登录</h3>
-
-      <el-form
-        :model="LoginInfo"
-        status-icon
-        ref="LoginInfo"
-        label-width="100px"
-        class="demo-LoginInfo"
-      >
-        <el-form-item label="用户名" prop="pass">
-          <el-input
-            type="text"
-            v-model="LoginInfo.user_name"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="user_psw">
-          <el-input
-            type="password"
-            v-model="LoginInfo.user_psw"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('LoginInfo')"
-            >提交</el-button
-          >
-          <el-button @click="resetForm('LoginInfo')">重置</el-button>
-        </el-form-item>
-      </el-form>
-      <h3>注册</h3>
-      <el-form
-        :model="LoginInfo"
-        status-icon
-        ref="LoginInfo"
-        label-width="100px"
-        class="demo-LoginInfo"
-      >
-        <el-form-item label="用户名" prop="pass">
-          <el-input
-            type="text"
-            v-model="LoginInfo.user_name"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="user_psw">
-          <el-input
-            type="password"
-            v-model="LoginInfo.user_psw"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('LoginInfo')"
-            >提交</el-button
-          >
-          <el-button @click="resetForm('LoginInfo')">重置</el-button>
-        </el-form-item>
-      </el-form>
+      <h3>testPage</h3>
+      <Test></Test>
     </div>
   </div>
 </template>
 <script>
+import Test from './VideoTestPage.vue'
+
 export default {
   name: "LoginPage",
+  components:{Test},
   data() {
     return {
       LoginInfo: {
@@ -78,7 +24,7 @@ export default {
     submitForm(formName) {
       let params = new URLSearchParams();
       params.append("user_name", this.LoginInfo.user_name);
-      this.$axios.post("http://127.0.0.1:8000/login/", this.LoginInfo).then(
+      this.$axios.post("http://127.0.0.1:8080/api/login/", this.LoginInfo).then(
         (res) => {
           console.log(res);
         },
