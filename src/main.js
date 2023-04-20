@@ -3,15 +3,20 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import router from './router'
 import axios from 'axios'
-
 import { Form, Button, FormItem, Input } from 'element-ui'
+
+import Swiper from 'swiper'
+import "swiper/css/swiper.css";
+
 Vue.use({ Form, Button, FormItem, Input })
 Vue.component(Form.name, Form)
 Vue.component(Button.name, Button)
 Vue.component(Input.name, Input)
 Vue.component(FormItem.name, FormItem)
+
 Vue.use(VueRouter)
 Vue.config.productionTip = false
+
 
 
 new Vue({

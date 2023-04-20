@@ -13,7 +13,6 @@
             controls
             loop
             preload="auto"
-            autoplay
             :data-index="index"
             ref="videoRefs"
           ></video>
@@ -36,36 +35,38 @@ export default {
       },
     };
   },
-  watch: {
-    VideoData: {
-      handler() {
-        this.$nextTick(function () {
-          this.swiperInstance=new Swiper(".swiper-container", {
-            loop: true,
-            direction: "vertical",
-            mousewheel: true,
-            keyboard: true,
-            pagination: {
-              el: ".swiper-pagination",
-            },
-            on: {
-              slideChangeTransitionEnd: ()=>{
-                let videoRefs = this.$refs['videoRefs'];
-                if(videoRefs){
-                    videoRefs.forEach((video)=>{
-                        video.pause()
-                    })
-                }
-                console.log('切换');
-              },
-            },
-          });
-        });
-      },
-    },
-  },
   methods: {
-    
+    initSwiper() {
+      this.swiperInstance = new Swiper(".swiper-container", {
+        touchEventsTarget: "container", // 手势事件监听的目标元素
+        touchRatio: 1, // 触摸距离与轮播距离的比率
+        touchAngle: 45, // 触摸移动的角度小于这个值时，Swiper不会执行滑动
+        simulateTouch: true, // 是否开启模拟触摸功能
+        followFinger: true, // 是否开启触摸跟随功能
+        allowTouchMove: true, // 是否允许触摸滑动
+        passiveListeners: false, // 是否使用被动监听器来优化触摸滑动性能，
+        loop: true,
+        direction: "vertical",
+        mousewheel: true,
+        keyboard: true,
+        pagination: {
+          el: ".swiper-pagination",
+        },
+        on: {
+          slideChangeTransitionEnd: () => {
+            let videoRefs = this.$refs["videoRefs"];
+            if (videoRefs) {
+              videoRefs.forEach((video) => {
+                video.pause();
+              });
+            }
+            let activeIndex = this.swiperInstance.activeIndex;
+            videoRefs[activeIndex].play()
+            console.log(this.swiperInstance.activeIndex);
+          },
+        },
+      });
+    },
   },
   mounted() {
     this.$axios
@@ -77,12 +78,14 @@ export default {
         (res) => {
           console.log(res.data.data);
           this.VideoData = res.data.data;
+          this.initSwiper()
         },
         (err) => {
           console.log(err);
         }
       );
-  },
+    },
+
 };
 </script>
 <style scoped>
