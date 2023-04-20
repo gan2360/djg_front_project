@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 文件结构
+视频播放的内容主要在VideoTestPage组件中，LoginPage为默认路由的组件，没有功能代码，仅仅引入了VideoTestPage组件。
